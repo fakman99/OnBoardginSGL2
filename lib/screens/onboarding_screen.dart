@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import 'package:OnboardingSgl2/screens/stepper_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:OnboardingSgl2/util/styles.dart';
@@ -30,6 +31,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
 
+  // Créer le widget en fonction de la page
   List<Widget> _buildPageIndicator() {
     List<Widget> list = [];
     for (int i = 0; i < _nbrPages; i++) {
@@ -38,6 +40,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     return list;
   }
 
+  //Créer le dot (currenge page = isActive else notActive)
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 150),
@@ -54,6 +57,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.red,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: Container(
@@ -78,7 +82,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Container(
                   alignment: Alignment.centerRight,
                   child: FlatButton(
-                    onPressed: () => print('Skip'),
+                    onPressed: () => print('Skip'), //navigate to the next
                     child: Text(
                       'Skip',
                       style: TextStyle(
@@ -228,17 +232,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
       bottomSheet: _currentPage == _nbrPages - 1
           ? Container(
-              decoration: BoxDecoration(),
               height: 100.0,
               width: double.infinity,
-              color: Colors.white,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
                     onTap: () => print('Get started'), //navigate to the SGL app
                     child: Center(
                       child: Padding(
-                        padding: EdgeInsets.only(bottom: 30.0, left: 30),
+                        padding: EdgeInsets.only(top: 0.0, left: 25),
                         child: Text(
                           'Get started',
                           style: TextStyle(
@@ -251,10 +255,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () => print('Guide'), //navigate to the GuidePage
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => StepperShopScreen()),
+                    ), //navigate to the GuidePage
                     child: Center(
                       child: Padding(
-                        padding: EdgeInsets.only(bottom: 30.0, right: 30),
+                        padding: EdgeInsets.only(bottom: 0.0, right: 25),
                         child: Text(
                           'Guide',
                           style: TextStyle(

@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: any
+  im_stepper: ^0.1.2+10
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -44,8 +46,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+   - assets/
    - assets/images/
-
+   - assets/product/
   fonts:
    - family: CM Sans Serif
      fonts:
