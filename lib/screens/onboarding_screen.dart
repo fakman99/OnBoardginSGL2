@@ -16,10 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import 'package:OnboardingSgl2/screens/stepper_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:OnboardingSgl2/util/styles.dart';
+
+import 'articleListScreen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -63,7 +64,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topCenter,
+              begin: Alignment.topRight,
               end: Alignment.bottomCenter,
               colors: [
                 //dégradé de sgl Color
@@ -103,87 +104,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       });
                     },
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(40.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Center(
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/images/onboarding0.png',
-                                ),
-                                height: 300.0,
-                                width: 300.0,
-                              ),
-                            ),
-                            SizedBox(height: 30.0),
-                            Text(
-                              'Create a plant\nand a Green LAB',
-                              style: kTitleStyle,
-                            ),
-                            SizedBox(height: 15.0),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
-                              style: kSubtitleStyle,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(40.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Center(
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/images/onboarding1.png',
-                                ),
-                                height: 300.0,
-                                width: 300.0,
-                              ),
-                            ),
-                            SizedBox(height: 30.0),
-                            Text(
-                              'Live your life smarter\nwith us!',
-                              style: kTitleStyle,
-                            ),
-                            SizedBox(height: 15.0),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
-                              style: kSubtitleStyle,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(40.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Center(
-                              child: Image(
-                                image: AssetImage(
-                                  'assets/images/onboarding2.png',
-                                ),
-                                height: 300.0,
-                                width: 300.0,
-                              ),
-                            ),
-                            SizedBox(height: 30.0),
-                            Text(
-                              'Get a new experience\nof imagination',
-                              style: kTitleStyle,
-                            ),
-                            SizedBox(height: 15.0),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
-                              style: kSubtitleStyle,
-                            ),
-                          ],
-                        ),
-                      ),
+                      buildStepScreen(
+                          'assets/images/onboarding0.png',
+                          'Create a plant\nand a Green LAB',
+                          'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.'),
+                      buildStepScreen(
+                          'assets/images/onboarding1.png',
+                          'Create a plant\nand a Green LAB',
+                          'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.'),
+                      buildStepScreen(
+                          'assets/images/onboarding2.png',
+                          'Create a plant\nand a Green LAB',
+                          'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.'),
                     ],
                   ),
                 ),
@@ -239,7 +171,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: () => print('Get started'), //navigate to the SGL app
+                    onTap: () =>
+                        print('navigate to sgl app'), //navigate to the SGL app
                     child: Center(
                       child: Padding(
                         padding: EdgeInsets.only(top: 0.0, left: 25),
@@ -258,7 +191,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => StepperShopScreen()),
+                          builder: (context) => NewStepperScreen()),
                     ), //navigate to the GuidePage
                     child: Center(
                       child: Padding(
@@ -278,6 +211,37 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             )
           : Text(''), // "empty" widget
+    );
+  }
+
+  //Build onBoarding pages
+  Padding buildStepScreen(String image, String desc, String title) {
+    return Padding(
+      padding: EdgeInsets.all(40.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Image(
+              image: AssetImage(
+                image,
+              ),
+              height: 300.0,
+              width: 300.0,
+            ),
+          ),
+          SizedBox(height: 30.0),
+          Text(
+            desc,
+            style: kTitleStyle,
+          ),
+          SizedBox(height: 15.0),
+          Text(
+            desc,
+            style: kSubtitleStyle,
+          ),
+        ],
+      ),
     );
   }
 }
